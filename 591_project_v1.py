@@ -93,12 +93,14 @@ def cross_validation():
 
 
         clf = RandomForestClassifier(criterion='gini')
+        #clf = svm.SVC()
+        #clf = AdaBoostClassifier(n_estimators=100, algorithm="SAMME", random_state=0)
         clf.fit(train_x, train_y)
 
         pred = clf.predict(valid_x)
 
-        acc = sklearn.metrics.zero_one_loss(np.array(res_y), pred)
-        print("Accuracy score: " + str((1 - acc) * 100))
+        acc = sklearn.metrics.accuracy_score(np.array(res_y), pred)
+        print("Accuracy score: " + str(round(acc * 100, 2)) + "%")
         print()
 
 cross_validation()
